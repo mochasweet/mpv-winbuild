@@ -32,6 +32,7 @@ jobs:
           # optional: set the branch to checkout,
           # sync action checks out your 'target_sync_branch' anyway
           ref:  ${{ matrix.branch }}
+          fetch-depth: 0
           # REQUIRED if your upstream repo is private (see wiki)
           persist-credentials: false
 
@@ -43,9 +44,10 @@ jobs:
         with:
           target_sync_branch: ${{ matrix.branch }}
           # REQUIRED 'target_repo_token' exactly like this!
-          target_repo_token: ${{ secrets.GH_TOKEN }}
+          target_repo_token: ${{ secrets.GITHUB_TOKEN }}
           upstream_sync_branch: ${{ matrix.branch }}
           upstream_sync_repo: zhongfly/mpv-winbuild
+          upstream_pull_args: '--allow-unrelated-histories'
           # upstream_repo_access_token: ${{ secrets.UPSTREAM_REPO_SECRET }}
   
           # Set test_mode true during manual dispatch to run tests instead of the true action!!
